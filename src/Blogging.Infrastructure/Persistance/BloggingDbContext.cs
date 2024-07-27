@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace Blogging.Infrastructure.Persistance;
 internal class BloggingDbContext : IdentityDbContext<User, IdentityRole<int>, int>
@@ -32,21 +31,6 @@ internal class BloggingDbContext : IdentityDbContext<User, IdentityRole<int>, in
         builder.Entity<IdentityRoleClaim<int>>(entity => entity.ToTable("RoleClaims"));
         ///
 
-
-
-        /////  [Post] 1 <HAS> * [Comment]
-        //builder.Entity<Post>()
-        //    .HasMany(p => p.Comments)
-        //    .WithOne(c => c.Post)
-        //    .HasForeignKey(c => c.PostId)
-        //    .OnDelete(DeleteBehavior.Restrict);  
-
-        //builder.Entity<Comment>()
-        //    .HasOne(c => c.User)
-        //    .WithMany(u => u.Comments) 
-        //    .HasForeignKey(c => c.UserId)
-        //    .OnDelete(DeleteBehavior.Restrict);
-        /////
 
         ///  [User] 1 <HAS> * [Comment]
         builder.Entity<User>()
