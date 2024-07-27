@@ -45,6 +45,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IPostsRepository, PostsRepository>();
+        services.AddScoped<ICommentsRepository, CommentsRepository>();
+
 
 
     }

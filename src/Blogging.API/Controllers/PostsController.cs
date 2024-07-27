@@ -25,8 +25,8 @@ public class PostsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<PostDto?>> GetById(int id)
     {
-        var restaurant = await _mediator.Send(new GetPostByIdQuery(id));
-        return Ok(restaurant);
+        var post = await _mediator.Send(new GetPostByIdQuery(id));
+        return Ok(post);
     }
 
     [HttpGet]
