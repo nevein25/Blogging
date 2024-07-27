@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Blogging.Domain.Repositories;
+using Blogging.Infrastructure.Repositories;
 
 
 namespace Blogging.Infrastructure.Extensions;
@@ -42,6 +44,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddScoped<IPostsRepository, PostsRepository>();
 
 
     }

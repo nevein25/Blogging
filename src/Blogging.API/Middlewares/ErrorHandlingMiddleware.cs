@@ -28,10 +28,11 @@ public class ErrorHandlingMiddleware : IMiddleware
             _logger.LogWarning(notFound.Message);
 
         }
-        catch (ForbidException)
+        catch (ForbidException ex)
         {
             context.Response.StatusCode = 403;
-            await context.Response.WriteAsync("Access forbidden");
+            //await context.Response.WriteAsync("Access forbidden");
+            await context.Response.WriteAsJsonAsync(ex.Message);
         }
         catch (Exception ex)
         {

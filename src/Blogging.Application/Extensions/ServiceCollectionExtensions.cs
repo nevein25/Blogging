@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Blogging.Application.Users;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +10,14 @@ public static class ServiceCollectionExtensions
     {
         var applicationAssembly = typeof(ServiceCollectionExtensions).Assembly;
 
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
+
         services.AddValidatorsFromAssembly(applicationAssembly)
-            .AddFluentValidationAutoValidation();
+                .AddFluentValidationAutoValidation();
+
+        services.AddAutoMapper(applicationAssembly);
+
+        services.AddScoped<IUserContext, UserContext>();
+        services.AddHttpContextAccessor();
     }
 }
