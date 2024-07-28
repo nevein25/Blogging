@@ -1,0 +1,566 @@
+{
+	"info": {
+		"_postman_id": "52f00c43-f2d3-4063-933b-537fa15fbfa1",
+		"name": "Blogging Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23244862"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('username');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"JohnDoe\",\r\n  \"password\": \"TEST@test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/login",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('username');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"nev2\",\r\n  \"email\": \"nev2@gmail.com\",\r\n  \"password\": \"TEST@test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/register",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"kk\",\r\n  \"content\": \"j\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}posts",
+							"host": [
+								"{{url}}posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"string\",\r\n  \"content\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}posts/9",
+							"host": [
+								"{{url}}posts"
+							],
+							"path": [
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all matching",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}posts/search?searchPhraseTitle=t&searchPhraseAuthor=string&pageSize=10&pageNumber=1&sortBy=CreatedAt&sortDirection=Descending",
+							"host": [
+								"{{url}}posts"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "searchPhraseTitle",
+									"value": "t"
+								},
+								{
+									"key": "searchPhraseAuthor",
+									"value": "string"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "sortBy",
+									"value": "CreatedAt"
+								},
+								{
+									"key": "sortDirection",
+									"value": "Descending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}posts/1",
+							"host": [
+								"{{url}}posts"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}posts/1",
+							"host": [
+								"{{url}}posts"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"text\": \"new\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}posts/3/comments",
+							"host": [
+								"{{url}}posts"
+							],
+							"path": [
+								"3",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"text\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}posts/1/comments/8",
+							"host": [
+								"{{url}}posts"
+							],
+							"path": [
+								"1",
+								"comments",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all by postId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}posts/3/comments",
+							"host": [
+								"{{url}}posts"
+							],
+							"path": [
+								"3",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}posts/1/comments/4",
+							"host": [
+								"{{url}}posts"
+							],
+							"path": [
+								"1",
+								"comments",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}posts/2/comments/10",
+							"host": [
+								"{{url}}posts"
+							],
+							"path": [
+								"2",
+								"comments",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Follow",
+			"item": [
+				{
+					"name": "follow other user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"followeeId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}UserFollows",
+							"host": [
+								"{{url}}UserFollows"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfollow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}UserFollows/2",
+							"host": [
+								"{{url}}UserFollows"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "people im following",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"followeeId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}UserFollows",
+							"host": [
+								"{{url}}UserFollows"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
