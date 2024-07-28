@@ -28,13 +28,6 @@ public class PostsController : ControllerBase
         return Ok(post);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        var posts = await _mediator.Send(new GetAllPostsQuery());
-        return Ok(posts);
-    }
-
     [HttpGet("search")]
     public async Task<IActionResult> GetAllMatching([FromQuery]GetAllPostsQuery query)
     {

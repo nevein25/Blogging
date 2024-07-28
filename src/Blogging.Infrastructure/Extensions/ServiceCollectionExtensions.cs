@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Blogging.Domain.Repositories;
 using Blogging.Infrastructure.Repositories;
+using Blogging.Infrastructure.Seeders;
 
 
 namespace Blogging.Infrastructure.Extensions;
@@ -48,6 +49,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICommentsRepository, CommentsRepository>();
         services.AddScoped<IUserFollowsRepository, UserFollowsRepository>();
         services.AddScoped<IUsersRepository, UsersRepository>();
+        services.AddScoped<IBlogSeeder, BlogSeeder>();
 
 
 
