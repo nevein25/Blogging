@@ -1,5 +1,4 @@
 ﻿using Blogging.Application.Comments.DTOs;
-using Blogging.Application.Posts.DTOs;
 using MediatR;
 
 

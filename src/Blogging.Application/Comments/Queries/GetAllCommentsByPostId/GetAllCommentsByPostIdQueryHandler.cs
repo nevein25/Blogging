@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Blogging.Application.Comments.DTOs;
-using Blogging.Application.Posts.DTOs;
-using Blogging.Application.Posts.Queries.GetAllPosts;
 using Blogging.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -14,8 +12,8 @@ internal class GetAllCommentsByPostIdQueryHandler : IRequestHandler<GetAllCommen
     private readonly ILogger<GetAllCommentsByPostIdQueryHandler> _logger;
 
     public GetAllCommentsByPostIdQueryHandler(ICommentsRepository commentsRepository,
-                                   IMapper mapper,
-                                   ILogger<GetAllCommentsByPostIdQueryHandler> logger)
+                                              IMapper mapper,
+                                              ILogger<GetAllCommentsByPostIdQueryHandler> logger)
     {
         _commentsRepository = commentsRepository;
         _mapper = mapper;

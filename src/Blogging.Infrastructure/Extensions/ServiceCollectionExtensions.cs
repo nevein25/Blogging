@@ -46,6 +46,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IPostsRepository, PostsRepository>();
         services.AddScoped<ICommentsRepository, CommentsRepository>();
+        services.AddScoped<IUserFollowsRepository, UserFollowsRepository>();
+        services.AddScoped<IUsersRepository, UsersRepository>();
 
 
 

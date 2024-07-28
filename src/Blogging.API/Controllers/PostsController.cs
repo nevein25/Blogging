@@ -6,7 +6,6 @@ using Blogging.Application.Posts.Queries.GetAllPosts;
 using Blogging.Application.Posts.Queries.GetPostById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogging.API.Controllers;
@@ -40,7 +39,6 @@ public class PostsController : ControllerBase
     {
         var postId = await _mediator.Send(command);
         return CreatedAtAction(nameof(GetById), new { Id = postId }, null);
-        //return Ok();
     }
 
 
