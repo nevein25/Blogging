@@ -45,5 +45,14 @@ internal class UserFollowsRepository : IUserFollowsRepository
                             .Where(uf => uf.FollowerId == followerId)
                             .ToListAsync();
     }
+
+    public async Task<IEnumerable<int>> GetUserIdsThatCurrentUserIsFollowing(int followerId)
+    {
+        return await _context.UserFollows
+                            .Include(uf => uf.Followee)
+                            .Where(uf => uf.FollowerId == followerId)
+                            .Select(uf => uf.FolloweeId)
+                            .ToListAsync();
+    }
     public Task SaveChanges() => _context.SaveChangesAsync();
 }

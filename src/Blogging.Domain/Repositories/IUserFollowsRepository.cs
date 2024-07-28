@@ -7,7 +7,7 @@ public interface IUserFollowsRepository
     Task<UserFollow?> GetById(int followerId, int followeeId);
 
     Task<IEnumerable<UserFollow>> GetUsersThatCurrentUserIsFollowing(int followerId);
-
+    Task<IEnumerable<int>> GetUserIdsThatCurrentUserIsFollowing(int followerId);
     Task<bool> IsFollowing(int followerId, int followeeId);
     Task Delete(UserFollow entity);
     Task SaveChanges();

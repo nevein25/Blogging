@@ -34,6 +34,14 @@ public class PostsController : ControllerBase
         var posts = await _mediator.Send(new GetAllPostsQuery());
         return Ok(posts);
     }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> GetAllMatching([FromQuery]GetAllPostsQuery query)
+    {
+        var posts = await _mediator.Send(query);
+        return Ok(posts);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreatePost(CreatePostCommand command)
     {
